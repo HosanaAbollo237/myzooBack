@@ -4,8 +4,8 @@ define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS']) ? "https" : "
 //echo URL; // https://localhost/myzoo/server_animaux/
 
 require_once "controllers/front/API.controller.php";
-
 $apiController = new APIController();
+
 
 try{
     
@@ -45,35 +45,4 @@ try{
         $msg =  $e->getMessage();
         echo $msg;
     }
-/*
-try{
-    // Cas où l'utilisateur accède à index.php sans avoir mentionné la page via ?page=nomPage
-    if(empty($_GET['page'])){
-        throw new Exception("La page n'existe pas");
-    } else {
-        $url = explode("/",filter_var($_GET['page'],FILTER_SANITIZE_URL));
-        if(empty($url[1]) || empty($url[2])) throw new Exception ("La page n'existe pas");
-        switch($url[1]){
-            case "front" : 
-                switch($url[2]){
-                    case "animaux": echo "données JSON des animaux demandées";
-                    break;
-                    case "animal": echo "données JSON de l'animal ".$url[2]." demandées";
-                    break;
-                    case "continents": echo "données JSON des continents demandées";
-                    break;
-                    case "familles": echo "données JSON des familles demandées";
-                    break;
-                    default : throw new Exception ("La page n'existe pas");
-                }
-            break;
-            case "back" : echo "page back end demandée";
-            break;
-            default : throw new Exception ("La page n'existe pas");
-        }
-    }
-} catch (Exception $e){
-    $msg = $e->getMessage();
-    echo $msg;
-}
-*/
+

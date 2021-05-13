@@ -1,10 +1,22 @@
 <?php
+require_once 'models/front/API.manager.php';
 
 class APIController{
 
+    private $apiManager;
+
+    // Permet d'apporter des modification concernant les requetes front-end
+    public function __construct(){
+        $this->apiManager = new APIManager();
+    }
+
     public function getAnimals() 
     {
-        echo "Envoie des animaux";
+        // Permet de récuperer les infos des animaux
+        $animals = $this->apiManager->getDBAnimals();
+             echo "<pre>";
+                 print_r($animals);
+             echo "<pre/>";
     }
 
     public function getAnimal($idAnimal){
