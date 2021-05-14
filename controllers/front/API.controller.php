@@ -13,21 +13,31 @@ class APIController{
     public function getAnimals() 
     {
         // Permet de récuperer les infos des animaux
-        $animals = $this->apiManager->getDBAnimals();
-             echo "<pre>";
-                 print_r($animals);
-             echo "<pre/>";
+    $animals = $this->apiManager->getDBAnimals();
+            echo "<pre>";
+                print_r($animals);
+            echo "<pre/>";
     }
 
-    public function getAnimal($idAnimal){
-        echo "Envoie des infos de l'animal ID de l'animal : $idAnimal </br>";
+    public function getAnimal($id){
+       $rows_animal = $this->apiManager->getDBAnimal($id);
+       echo "<pre>";
+            print_r($rows_animal);
+       echo "<pre/>";
+
     }
 
     public function getContinents(){
-        echo "Envoyer les informations des continents";
+        $continents = $this->apiManager->getDBContinents();
+        echo "<pre>";
+            print_r($continents);
+        echo "<pre/>";
     }
 
     public function getFamilies(){
-        echo "Envoie des informations de la familles";
+        $families = $this->apiManager->getDBFamilies();
+        echo "<pre>";
+            print_r($families);
+        echo "<pre/>";
     }
 }

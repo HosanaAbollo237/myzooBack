@@ -30,8 +30,10 @@ try{
                             if(empty($url[2]))
                                 throw new Exception('Renseigner un id Animal');
                                 $apiController->getAnimal($url[2]);break;
-                        case 'continents' :$apiController->getContinents();break;
-                        case 'families' : $apiController->getFamilies();break;
+                        case 'continents' :
+                            $apiController->getContinents();break;
+                        case 'families' : 
+                            $apiController->getFamilies();break;
                         default: throw new Exception ('Cette page n\'existe pas');
                     }
                 break;
