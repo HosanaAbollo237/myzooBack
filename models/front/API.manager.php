@@ -8,11 +8,10 @@ class APIManager extends Model{
 
         $animals = [];
 
-        $stmt = "SELECT a.nomA, GROUP_CONCAT(c.libelleC SEPARATOR '- ') FROM animal a 
+        $stmt = "SELECT a.nomA, a.descA, f.libelleF, c.libelleC FROM animal a 
             INNER JOIN famille f ON f.idF = a.idF 
             INNER JOIN animal_continent ac ON a.idA = ac.idA 
-            INNER JOIN continent c ON c.idC = ac.idC 
-            GROUP By a.idA";
+            INNER JOIN continent c ON c.idC = ac.idC";
 
         $req = $this->getDatabase()->prepare($stmt);;
         $req->execute(); 
@@ -37,9 +36,7 @@ class APIManager extends Model{
         $req->execute();
         $rows_animal = $req->fetchAll(PDO::FETCH_ASSOC);
         
-        echo '<pre>';
-             print_r($rows_animal);
-        echo '<pre/>';
+        return $rows_animal;
     }
 
     public function getDBContinents(){

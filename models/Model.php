@@ -11,13 +11,20 @@ abstract class Model{
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
     }
 
-    // Récupération qu'UNE instance de la BDD
+    // Récupération d'UNE instance de la BDD
     protected function getDatabase(){
         if(self::$pdo === null){
             self::setDatabase();
-
         }
         return self::$pdo;
+    }
+
+    //Permet de convertir des informations au format json 
+    static function sendJSON($data){
+        //Permet de contourner les pb cross origin access
+        header("Access-Control-Allow-Origin: *");
+        // Envoie des données BDD au format json avec flag gérant les accents 
+        echo json_encode($data,JSON_UNESCAPED_UNICODE); 
     }
 
 
