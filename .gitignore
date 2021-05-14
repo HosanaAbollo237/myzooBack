@@ -1,0 +1,14 @@
+### react ###
+react_myzoo/.DS_*
+react_myzoo/*.log
+react_myzoo/logs
+react_myzoo/**/*.backup.*
+react_myzoo/**/*.back.*
+
+react_myzoo/node_modules
+
+react_myzoo/*.sublime*
+
+react_myzoo/psd
+react_myzoo/thumb
+react_myzoo/sketch

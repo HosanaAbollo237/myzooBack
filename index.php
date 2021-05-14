@@ -20,7 +20,6 @@ try{
             // minimum 2 infos dans l'url /info1/info2
             if(empty($url[0]) || empty($url[1]) ) throw new Exception ('ELSE : Cette page n\'existe pas !');
 
-            //dans l'url front/case : 4 cas possible 
             switch($url[0]){
                 case 'front' : 
                     switch($url[1]){
