@@ -8,7 +8,7 @@ class APIManager extends Model{
 
         $animals = [];
 
-        $stmt = "SELECT a.nomA, a.descA, f.libelleF, c.libelleC FROM animal a 
+        $stmt = "SELECT a.*, f.*, c.* FROM animal a 
             INNER JOIN famille f ON f.idF = a.idF 
             INNER JOIN animal_continent ac ON a.idA = ac.idA 
             INNER JOIN continent c ON c.idC = ac.idC";
@@ -25,14 +25,14 @@ class APIManager extends Model{
     public function getDBAnimal($id){
         $rows_animal = [];
 
-        $stmt = "SELECT * FROM animal a 
-            INNER JOIN animal_continent ac ON a.idA = ac.idA 
+        $stmt = "SELECT *, GROUP_CONCAT(c.libelleC SEPARATOR ',') as continents FROM animal a
             INNER JOIN famille f ON f.idF = a.idF 
-            INNER JOIN continent c ON c.idC = ac.idC 
+            INNER JOIN animal_continent ac ON a.idA = ac.idA 
+            INNER JOIN continent c ON ac.idC = c.idC 
             WHERE a.idA = :idA";
 
         $req = $this->getDatabase()->prepare($stmt);
-        $req->bindParam(':idA',$id);
+        $req->bindParam(':idA',$id,PDO::PARAM_INT);
         $req->execute();
         $rows_animal = $req->fetchAll(PDO::FETCH_ASSOC);
         

@@ -12,16 +12,52 @@ class APIController{
         $this->apiManager = new APIManager();
     }
 
+    private function format_subRow($myRow){
+        if(isset($myRow['continents'])){
+
+            $arr = [];
+            $continent_elem = explode(',',$myRow);
+            for($i=0;$i < count($continent_elem); $i++){ 
+                $arr[$continent_elem[$i]] = $continent_elem[$i];
+            }
+            return $arr;
+        }
+    }
+
+    private function formatDataAnimalRow($rows){
+        $arr = [];
+        foreach($rows as $row)
+        { 
+                $arr[$row['idA']] =    
+                [
+                    "id" => $row['idA'],
+                    "nom" => $row['nomA'],
+                    "description" => $row["descA"],
+                    "image" => $row["imgA"],
+                    "famille" => [
+                        "idFamily" => $row["idF"],
+                        "libelle" => $row["libelleF"],
+                        "description" => $row["descF"]],
+                    "continents" => $this->format_subRow($row)
+                ];
+            }
+        return $arr;
+    }
+
     public function getAnimals() 
     {
         // Permet de récuperer les infos des animaux
     $animals = $this->apiManager->getDBAnimals();
-        Model::sendJSON($animals);
+        Model::sendJSON($this->formatDataAnimalRow($animals));
     }
 
-    public function getAnimal($id){
-       $rows_animal = $this->apiManager->getDBAnimal($id);
-       Model::sendJSON($rows_animal);
+    public function getAnimal($idGet){
+        $idAnimal = (int)$idGet;
+        if(is_numeric($idAnimal) && $idAnimal >= 1 ){
+            $rows_animal = $this->apiManager->getDBAnimal($idAnimal);
+            $oneAnimalDatas = $this->formatDataAnimalRow($rows_animal);
+            Model::sendJSON($oneAnimalDatas);
+        }
     }
 
     public function getContinents(){
