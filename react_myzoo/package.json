@@ -11,7 +11,7 @@
   },
   "scripts": {
     "create": "webpack",
-    "serve": "webpack serve --hot-only",
+    "serve": "webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
