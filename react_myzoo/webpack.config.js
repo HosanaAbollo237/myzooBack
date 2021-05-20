@@ -4,14 +4,28 @@ var HtmlWebpackPlugin =  require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry : './src/index.js',
+    entry : { index: path.join(__dirname, '/src/index.js') },
     output : {
         path : path.resolve(__dirname , 'dist'),
         filename: 'index_bundle.js',
-        publicPath: '/'
+        publicPath: '/'   /* */
     },
+    devtool: 'inline-source-map',
     devServer: {
+        publicPath: "http://localhost:8080/dist/",
+        contentBase: path.resolve(__dirname, './dist'),
+        proxy: {
+            "/api": {
+                target: 'http://localhost:80/myzoo/front/',
+                secure: false,
+                changeOrigin: true,
+            }
+        },
+        host: "localhost",
+        port: 8080,
         historyApiFallback: true,
+        inline: true,
+        hot: true,
     },
     module : {
         rules : [

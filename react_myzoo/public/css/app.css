@@ -1,0 +1,13 @@
+#app{
+    width: 100vw;
+    height: 100vh;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+main *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+

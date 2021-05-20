@@ -23,7 +23,7 @@ const Navbar = (props) => {
                         <NavLink to="/" className="NavLink"> Home </NavLink>
                     </li>
                     <li className="menuItem">
-                        <NavLink to='/animals'> Animals </NavLink>
+                        <NavLink to='/animals'> Parc </NavLink>
                     </li>
                     <li className="menuItem"> 
                         <NavLink to="/continents"> Continent </NavLink>

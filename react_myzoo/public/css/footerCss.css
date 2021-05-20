@@ -1,0 +1,15 @@
+footer{
+    display: flex;
+    background-color: royalblue;
+    height: 150px ;
+    align-items: center;
+    justify-content: space-around;
+}
+
+div.logoFB > img, div.logoTW > img{
+    width: 80px;
+}
+
+div.logoYT > img{
+    width: 180px;
+}
