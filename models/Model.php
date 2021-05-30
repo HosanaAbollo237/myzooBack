@@ -23,6 +23,7 @@ abstract class Model{
     static function sendJSON($data){
         //Permet de contourner les pb cross origin access
         header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json");
         // Envoie des données BDD au format json avec flag gérant les accents 
         echo json_encode($data,JSON_UNESCAPED_UNICODE); 
     }

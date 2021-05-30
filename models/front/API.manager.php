@@ -8,16 +8,21 @@ class APIManager extends Model{
 
         $animals = [];
 
-        $stmt = "SELECT a.*, f.*, c.* FROM animal a 
-            INNER JOIN famille f ON f.idF = a.idF 
-            INNER JOIN animal_continent ac ON a.idA = ac.idA 
-            INNER JOIN continent c ON c.idC = ac.idC";
-
-        $req = $this->getDatabase()->prepare($stmt);;
+      //  $stmt = "SELECT a.*, f.*, c.* FROM animal a 
+      //      INNER JOIN famille f ON f.idF = a.idF 
+      //      INNER JOIN animal_continent ac ON a.idA = ac.idA 
+      //      INNER JOIN continent c ON c.idC = ac.idC";
+      //      
+       $stmt = "SELECT a.*, f.*, c.* FROM animal a 
+       INNER JOIN famille f ON f.idF = a.idF 
+       INNER JOIN animal_continent ac ON a.idA = ac.idA 
+       INNER JOIN continent c ON c.idC = ac.idC";
+      
+        $req = $this->getDatabase()->prepare($stmt);
         $req->execute(); 
 
         $animals = $req->fetchAll(PDO::FETCH_ASSOC);  
-
+        $req->closeCursor();
         return $animals;
 
     }
@@ -35,7 +40,7 @@ class APIManager extends Model{
         $req->bindParam(':idA',$id,PDO::PARAM_INT);
         $req->execute();
         $rows_animal = $req->fetchAll(PDO::FETCH_ASSOC);
-        
+        $req->closeCursor();
         return $rows_animal;
     }
 
@@ -46,22 +51,18 @@ class APIManager extends Model{
 
         $req = $this->getDatabase()->prepare($stmt);
         $req->execute();
-
         $continents = $req->fetchAll(PDO::FETCH_ASSOC);
-        
+        $req->closeCursor();
         return $continents;
     }
 
     public function getDBFamilies(){
         $families = [];
-
         $stmt = "SELECT * FROM famille";
-
         $req = $this->getDatabase()->prepare($stmt);
         $req->execute();
-
         $families = $req->fetchAll(PDO::FETCH_ASSOC);
-        
+        $req->closeCursor();
         return $families;
     }
 }
