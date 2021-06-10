@@ -41,10 +41,10 @@ class APIController{
 
 
     
-    public function getAnimals() 
+    public function getAnimals($idFamille,$idContinent) 
     {
         // Permet de récuperer les infos des animaux
-    $animals = $this->apiManager->getDBAnimals();
+    $animals = $this->apiManager->getDBAnimals($idFamille,$idContinent);
         Model::sendJSON($this->formatDataLine($animals));
     }
 
